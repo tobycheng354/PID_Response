@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 20px 0; /* Add margin for better spacing */
+    }
+
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px; /* Add space between labels and sliders */
+    }
+
+    input[type="range"] {
+      width: 55%; /* Adjust the width of the sliders */
+      margin-bottom: 10px; /* Add space between sliders */
+    }
+
+    #kPSlider {
+      background-color: red; /* Set the background color of the Kp slider to red */
+    }
+
+    #kISlider {
+      background-color: green; /* Set the background color of the Ki slider to green */
+    }
+
+    #kDSlider {
+      background-color: blue; /* Set the background color of the Kd slider to blue */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="slider-container">
+    <label for="kPSlider">K<sub>p</sub>:</label>
+    <input type="range" id="kPSlider" min="1" max="25" value="1" oninput="updateImage()">
+
+    <label for="kISlider">K<sub>i</sub>:</label>
+    <input type="range" id="kISlider" min="1" max="25" value="1" oninput="updateImage()">
+
+    <label for="kDSlider">K<sub>d</sub>:</label>
+    <input type="range" id="kDSlider" min="1" max="25" value="1" oninput="updateImage()">
+  </div>
+
+  <div id="imageContainer">
+    <img id="displayedImage" src="https://tobycheng354.github.io/PID_Final/z_1_y_1_x_1.jpg" alt="Image">
+  </div>
+
+  <script>
+    function updateImage() {
+      var kP = document.getElementById("kPSlider").value;
+      var kI = document.getElementById("kISlider").value;
+      var kD = document.getElementById("kDSlider").value;
+
+      // Adjust the image path based on your repository structure
+      var imageUrl = 'https://tobycheng354.github.io/PID_Final/z_' + kP + '_y_' + kI + '_x_' + kD + '.jpg';
+
+      document.getElementById("displayedImage").src = imageUrl;
+    }
+  </script>
+
+</body>
+
+</html>
