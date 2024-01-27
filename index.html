@@ -5,36 +5,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    img {
-      max-width: 100%;
-      height: auto;
-      margin: 20px 0; /* Add margin for better spacing */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
 
     .slider-container {
       display: flex;
       flex-direction: column;
-    }
-
-    label {
-      margin-bottom: 5px; /* Add space between labels and sliders */
+      align-items: flex-end;
+      margin-right: 20px;
     }
 
     input[type="range"] {
-      width: 55%; /* Adjust the width of the sliders */
-      margin-bottom: 10px; /* Add space between sliders */
+      width: 15px;
+      height: 150px;
+      margin-bottom: 10px;
+      writing-mode: bt-lr;
+      transform: rotate(180deg);
+      appearance: slider-vertical;
     }
 
-    #kPSlider {
-      background-color: red; /* Set the background color of the Kp slider to red */
+    input[type="range"]::-webkit-slider-runnable-track {
+      background-color: transparent;
     }
 
-    #kISlider {
-      background-color: green; /* Set the background color of the Ki slider to green */
+    #kPSlider::-webkit-slider-runnable-track {
+      background-color: red;
     }
 
-    #kDSlider {
-      background-color: blue; /* Set the background color of the Kd slider to blue */
+    #kISlider::-webkit-slider-runnable-track {
+      background-color: green;
+    }
+
+    #kDSlider::-webkit-slider-runnable-track {
+      background-color: blue;
+    }
+
+    input[type="range"]::-moz-range-track {
+      background-color: transparent;
+    }
+
+    #kPSlider::-moz-range-track {
+      background-color: red;
+    }
+
+    #kISlider::-moz-range-track {
+      background-color: green;
+    }
+
+    #kDSlider::-moz-range-track {
+      background-color: blue;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      background-color: transparent;
+      border: 2px solid #fff;
+      height: 25px;
+      width: 15px;
+      border-radius: 5px;
+    }
+
+    #kPSlider::-webkit-slider-thumb {
+      border-color: red;
+    }
+
+    #kISlider::-webkit-slider-thumb {
+      border-color: #4CAF50;
+    }
+
+    #kDSlider::-webkit-slider-thumb {
+      border-color: blue;
+    }
+
+    label {
+      margin-bottom: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    #kPSliderLabel {
+      color: red;
+    }
+
+    #kISliderLabel {
+      color: #4CAF50;
+    }
+
+    #kDSliderLabel {
+      color: blue;
+    }
+
+    #imageContainer {
+      margin-left: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 12% 0 20px 0; /* Adjust the margin-top to shift the image down by 7% */
     }
   </style>
 </head>
@@ -42,18 +114,18 @@
 <body>
 
   <div class="slider-container">
-    <label for="kPSlider">K<sub>p</sub>:</label>
-    <input type="range" id="kPSlider" min="1" max="25" value="1" oninput="updateImage()">
+    <label for="kPSlider" id="kPSliderLabel">Kp</label>
+    <input type="range" id="kPSlider" min="1" max="25" value="1" oninput="updateImage()" />
 
-    <label for="kISlider">K<sub>i</sub>:</label>
-    <input type="range" id="kISlider" min="1" max="25" value="1" oninput="updateImage()">
+    <label for="kISlider" id="kISliderLabel">Ki</label>
+    <input type="range" id="kISlider" min="1" max="25" value="1" oninput="updateImage()" />
 
-    <label for="kDSlider">K<sub>d</sub>:</label>
-    <input type="range" id="kDSlider" min="1" max="25" value="1" oninput="updateImage()">
+    <label for="kDSlider" id="kDSliderLabel">Kd</label>
+    <input type="range" id="kDSlider" min="1" max="25" value="1" oninput="updateImage()" />
   </div>
 
   <div id="imageContainer">
-    <img id="displayedImage" src="https://tobycheng354.github.io/PID_Response/z_1_y_1_x_1.jpg" alt="Image">
+    <img id="displayedImage" src="https://tobycheng354.github.io/PID_Response/z_1_y_1_x_1.jpg" alt="Image" />
   </div>
 
   <script>
@@ -62,7 +134,6 @@
       var kI = document.getElementById("kISlider").value;
       var kD = document.getElementById("kDSlider").value;
 
-      // Adjust the image path based on your repository structure
       var imageUrl = 'https://tobycheng354.github.io/PID_Response/z_' + kP + '_y_' + kI + '_x_' + kD + '.jpg';
 
       document.getElementById("displayedImage").src = imageUrl;
